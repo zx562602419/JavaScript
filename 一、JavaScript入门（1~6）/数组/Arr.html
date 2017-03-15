@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>数组对象的方法</title>
+    <style>
+        p{
+            padding-left: 23px;
+        }
+        li{
+            line-height: 40px;
+        }
+        #btnList li{
+            width: 100px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 align="center">数组对象的方法示例</h1>
+
+    <p>arr1 = <span id="arr1"></span></p>
+
+    <p>arr2 = <span id="arr2"></span></p>
+
+    <ol>
+        <li>输出结果：<mark id="result"></mark></li>
+        <li>数据类型：<mark id="type"></mark></li>
+        <li>属性描述：<mark id="description"></mark></li>
+        <li>定义用法：<mark id="definition"></mark></li>
+        <li>示例对象：<mark id="obj"></mark></li>
+        <li>代码示例：<mark id="use"></mark></li>
+    </ol>
+
+    <p>点击对应按钮查看效果</p>
+
+    <ol id="btnList">
+        <li><input type="button" onclick="arrConcat()" value="concat"/></li>
+        <li><input type="button" onclick="arrJoin()" value="join"/></li>
+        <li><input type="button" onclick="arrPop()" value="pop"/></li>
+        <li><input type="button" onclick="arrPush()" value="push"/></li>
+        <li><input type="button" onclick="arrReverse()" value="reverse"/></li>
+        <li><input type="button" onclick="arrShift()" value="shift"/></li>
+        <li><input type="button" onclick="arrSlice()" value="slice"/></li>
+        <li><input type="button" onclick="arrSort()" value="sort"/></li>
+        <li><input type="button" onclick="arrSplice()" value="splice"/></li>
+        <li><input type="button" onclick="arrToString()" value="toString"/></li>
+        <li><input type="button" onclick="arrUnshift()" value="unshift"/></li>
+        <li><input type="button" onclick="arrValueOf()" value="valueOf"/></li>
+    </ol>
+
+<script>
+    function $(str){
+        return document.getElementById(str);
+    }
+    var result = $('result');
+    var type = $('type');
+    var description = $('description');
+    var definition = $('definition');
+    var obj = $('obj');
+    var use = $('use');
+    var arr1Text = $('arr1');
+    var arr2Text = $('arr2');
+    var arr1 = [0,1,2,3,4,5,6,7,8,9];
+    var arr2 = [9,8,7,6,5,4,3,2,1,0];
+    arr1Text.innerText = '[' + arr1 + '];';
+    arr2Text.innerText = '[' + arr2 + '];';
+
+    //concat    连接两个或更多的数组，并返回结果。
+    function arrConcat(){
+        var newArr = arr1.concat(arr2);
+        result.innerText = newArr;
+        type.innerText = typeof(newArr);
+        description.innerText = '连接两个或更多的数组，并返回结果。';
+        definition.innerText = 'concat()方法用于连接两个或多个数组。该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本。';
+        obj.innerText = 'arr1 arr2';
+        use.innerText = 'arr1.concat(arr2)';
+        arr1Text.innerText = '[' + arr1 + '];';
+        arr2Text.innerText = '[' + arr2 + '];';
+    }
+
+    //join  把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔。
+    function arrJoin(){
+        var newArr = arr1.join("--");
+        result.innerText = newArr;
+        type.innerText = typeof(newArr);
+        description.innerText = '把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔。';
+        definition.innerText = 'join() 方法用于把数组中的所有元素放入一个字符串。元素通过指定的分隔符进行分隔。';
+        obj.innerText = 'arr1';
+        use.innerText = 'arr1.join("--")';
+        arr1Text.innerText = '[' + arr1 + '];';
+        arr2Text.innerText = '[' + arr2 + '];';
+    }
+
+    //pop   删除并返回数组的最后一个元素
+    function arrPop(){
+        var newArr = arr1.pop();
+        result.innerText = newArr;
+        type.innerText = typeof(newArr);
+        description.innerText = '删除并返回数组的最后一个元素。';
+        definition.innerText = 'pop() 方法用于删除并返回数组的最后一个元素。pop() 方法将删除 arr1 的最后一个元素，把数组长度减 1，并且返回它删除的元素的值。如果数组已经为空，则 pop() 不改变数组，并返回 undefined 值。';
+        obj.innerText = 'arr1';
+        use.innerText = 'arr1.pop()';
+        arr1Text.innerText = '[' + arr1 + '];';
+        arr2Text.innerText = '[' + arr2 + '];';
+    }
+
+    //push  向数组的末尾添加一个或更多元素，并返回新的长度。
+    function arrPush(){
+        var newArr = arr1.push(10);
+        result.innerText = newArr;
+        type.innerText = typeof(newArr);
+        description.innerText = '向数组的末尾添加一个或更多元素，并返回新的长度。';
+        definition.innerText = 'push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度。';
+        obj.innerText = 'arr1';
+        use.innerText = 'arr1.push(10)';
+        arr1Text.innerText = '[' + arr1 + '];';
+        arr2Text.innerText = '[' + arr2 + '];';
+    }
+
+    //reverse   颠倒数组中元素的顺序。
+    function arrReverse(){
+        var newArr = arr1.reverse();
+        result.innerText = newArr;
+        type.innerText = typeof(newArr);
+        description.innerText = '颠倒数组中元素的顺序。';
+        definition.innerText = 'reverse() 方法用于颠倒数组中元素的顺序。该方法会改变原来的数组，而不会创建新的数组。';
+        obj.innerText = 'arr1';
+        use.innerText = 'arr1.reverse()';
+        arr1Text.innerText = '[' + arr1 + '];';
+        arr2Text.innerText = '[' + arr2 + '];';
+    }
+
+    //shift  删除并返回数组的第一个元素
+    function arrShift(){
+        var newArr = arr1.shift();
+        result.innerText = newArr;
+        type.innerText = typeof(newArr);
+        description.innerText = '删除并返回数组的第一个元素。';
+        definition.innerText = 'shift() 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。如果数组是空的，那么 shift() 方法将不进行任何操作，返回 undefined 值。请注意，该方法不创建新数组，而是直接修改原有的数组。';
+        obj.innerText = 'arr1';
+        use.innerText = 'arr1.shift()';
+        arr1Text.innerText = '[' + arr1 + '];';
+        arr2Text.innerText = '[' + arr2 + '];';
+    }
+
+    //slice 从某个已有的数组返回选定的元素
+    function arrSlice(){
+        var newArr = arr1.slice(2,6);
+        result.innerText = newArr;
+        type.innerText = typeof(newArr);
+        description.innerText = '从某个已有的数组返回选定的元素。';
+        definition.innerText = 'slice() 方法可从已有的数组中返回选定的元素。返回一个新的数组，包含从 start 到 end （不包括该元素）的arr1中的元素。请注意，该方法并不会修改数组，而是返回一个子数组。';
+        obj.innerText = 'arr1';
+        use.innerText = 'arr1.slice(2,6)';
+        arr1Text.innerText = '[' + arr1 + '];';
+        arr2Text.innerText = '[' + arr2 + '];';
+    }
+
+    //sort  对数组的元素进行排序
+    function arrSort(){
+        var newArr = arr1.sort();
+        result.innerText = newArr;
+        type.innerText = typeof(newArr);
+        description.innerText = '对数组的元素进行排序。';
+        definition.innerText = 'sort() 方法用于对数组的元素进行排序。如果调用该方法时没有使用参数，将按字母顺序对数组中的元素进行排序，说得更精确点，是按照字符编码的顺序进行排序。要实现这一点，首先应把数组的元素都转换成字符串（如有必要），以便进行比较如果想按照其他标准进行排序，就需要提供比较函数，该函数要比较两个值，然后返回一个用于说明这两个值的相对顺序的数字。比较函数应该具有两个参数 a 和 b，其返回值如下：若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。若 a 等于 b，则返回 0。若 a 大于 b，则返回一个大于 0 的值。';
+        obj.innerText = 'arr2';
+        use.innerText = 'arr2.sort()';
+        arr1Text.innerText = '[' + arr1 + '];';
+        arr2Text.innerText = '[' + arr2 + '];';
+    }
+
+    //splice 删除元素，并向数组添加新元素。
+    function arrSplice(){
+        var newArr = arr1.splice(2,2,'a','b','c');
+        result.innerText = newArr;
+        type.innerText = typeof(newArr);
+        description.innerText = '删除元素，并向数组添加新元素。';
+        definition.innerText = 'splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。splice() 方法可删除从 index 处开始的零个或多个元素，并且用参数列表中声明的一个或多个值来替换那些被删除的元素。如果从 arrayObject 中删除了元素，则返回的是含有被删除的元素的数组。要删除的项目数量。如果设置为 0，则不会删除项目。';
+        obj.innerText = 'arr1';
+        use.innerText = 'arr1.splice(2,2,"a","b","c")';
+        arr1Text.innerText = '[' + arr1 + '];';
+        arr2Text.innerText = '[' + arr2 + '];';
+    }
+
+    //toString 把数组转换为字符串，并返回结果。
+    function arrToString(){
+        var newArr = arr1.toString();
+        result.innerText = newArr;
+        type.innerText = typeof(newArr);
+        description.innerText = '把数组转换为字符串，并返回结果。';
+        definition.innerText = 'toString() 方法可把数组转换为字符串，并返回结果。当数组用于字符串环境时，JavaScript 会调用这一方法将数组自动转换成字符串。但是在某些情况下，需要显式地调用该方法。';
+        obj.innerText = 'arr1';
+        use.innerText = 'arr1.toString()';
+        arr1Text.innerText = '[' + arr1 + '];';
+        arr2Text.innerText = '[' + arr2 + '];';
+    }
+
+    //unshift 向数组的开头添加一个或更多元素，并返回新的长度。
+    function arrUnshift(){
+        var newArr = arr1.unshift(10,20);
+        result.innerText = newArr;
+        type.innerText = typeof(newArr);
+        description.innerText = '向数组的开头添加一个或更多元素，并返回新的长度。';
+        definition.innerText = 'unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。unshift() 方法将把它的参数插入 arrayObject 的头部，并将已经存在的元素顺次地移到较高的下标处，以便留出空间。该方法的第一个参数将成为数组的新元素 0，如果还有第二个参数，它将成为新的元素 1，以此类推。请注意，unshift() 方法不创建新的数组，而是直接修改原有的数组。unshift() 方法无法在 Internet Explorer 中正确地工作！';
+        obj.innerText = 'arr1';
+        use.innerText = 'arr1.unshift(10,20)';
+        arr1Text.innerText = '[' + arr1 + '];';
+        arr2Text.innerText = '[' + arr2 + '];';
+    }
+
+    //unshift 返回数组对象的原始值。
+    function arrValueOf(){
+        var newArr = arr1.valueOf();
+        result.innerText = newArr;
+        type.innerText = typeof(newArr);
+        description.innerText = '返回数组对象的原始值。';
+        definition.innerText = 'valueOf() 方法返回 Array 对象的原始值。该原始值由 Array 对象派生的所有对象继承。valueOf() 方法通常由 JavaScript 在后台自动调用，并不显式地出现在代码中。';
+        obj.innerText = 'arr1';
+        use.innerText = 'arr1.valueOf()';
+        arr1Text.innerText = '[' + arr1 + '];';
+        arr2Text.innerText = '[' + arr2 + '];';
+    }
+</script>
+</body>
+</html>

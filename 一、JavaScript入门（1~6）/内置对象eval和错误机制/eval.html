@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>根据输入算式进行计算</title>
+</head>
+<body>
+
+<input type="text" id="inputValue" value="请输入算式" onclick="mClick()"/>
+<input type="button" onclick="evalEg()" value="计算"/>
+<p id="error"></p>
+<!--<pre>-->
+    <!--var inputValue = document.getElementById('inputValue');-->
+    <!--var errorText = document.getElementById('inputValue');-->
+    <!--function mClick(){-->
+        <!--if(inputValue.value = '请输入算式'){-->
+            <!--inputValue.value = '';-->
+        <!--}-->
+    <!--}-->
+    <!--function evalEg(){-->
+        <!--try{-->
+            <!--inputValue.value = eval(inputValue.value);-->
+        <!--}catch(e){-->
+            <!--inputValue.value = '错误的算式';-->
+<!--//            error.innerText =-->
+            <!--console.log(e.description);-->
+            <!--console.log(e.message);-->
+            <!--console.log(e.number);-->
+            <!--console.log(e.name);-->
+        <!--}-->
+    <!--}-->
+<!--</pre>-->
+<script>
+    var inputValue = document.getElementById('inputValue');
+    var errorText = document.getElementById('inputValue');
+    function mClick(){
+        if(inputValue.value = '请输入算式'){
+            inputValue.value = '';
+        }
+    }
+    function evalEg(){
+        try{
+            inputValue.value = eval(inputValue.value);
+        }catch(e){
+            inputValue.value = '错误的算式';
+//            error.innerText =
+            console.log(e.description);
+            console.log(e.message);
+            console.log(e.number);
+            console.log(e.name);
+        }
+    }
+</script>
+</body>
+</html>

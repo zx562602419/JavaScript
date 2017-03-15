@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>内置对象Date的方法</title>
+    <style>
+        li {
+            line-height: 40px;
+        }
+
+        input {
+            margin-left: 40px;
+        }
+
+        span {
+            margin-left: 40px;
+            color: dodgerblue;
+        }
+    </style>
+</head>
+<body>
+<h1 align="center">内置对象Date的方法</h1>
+
+<p>Date 对象用于处理日期和时间。</p>
+
+<p>创建 Date 对象的语法：
+    <mark>  var date = new Date();</mark>
+    Date 对象会自动把当前日期和时间保存为其初始值。
+</p>
+<h4>使用Date内置对象中的方法创建当前简易时间表</h4>
+<ol>
+    <li>使用<mark>date.getFullYear()</mark>获取当前年份<mark>返回值为 4位</mark></li>
+    <li>使用<mark>date.getMonth()</mark>获取前月份<mark>返回值为 0~11</mark></li>
+    <li>使用<mark>date.getDate()</mark>获取前日期<mark>返回值为 1~31</mark></li>
+    <li>使用<mark>date.getDay()</mark>获取前星期<mark>返回值为 0~6</mark></li>
+    <li>使用<mark>date.getHours()</mark>获取前小时<mark>返回值为 0~23</mark></li>
+    <li>使用<mark>date.getMinutes()</mark>获取前分钟<mark>返回值为 0~59</mark></li>
+    <li>使用<mark>date.getSeconds()</mark>获取前秒钟<mark>返回值为 0~59</mark></li>
+
+</ol>
+<mark id="today"></mark>
+<script>
+    window.onload = function () {
+        //使用confirm判断是否显示当前时间
+        var today = document.getElementById('today');
+        if(confirm('是否显示当前时间')){
+            setInterval(function () {
+                time();
+            }, 500);
+        }else{
+            today.innerText = '你选择不显示当前时间';
+        }
+        //使用内置Date方法实现当前时间显示
+        function time() {
+            var date = new Date(),
+                Year = date.getFullYear(),
+                Month = date.getMonth() + 1,
+                Day = date.getDate(),
+                weekIndex = date.getDay(),
+                weekday = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+                Hours = date.getHours(),
+                Minutes = date.getMinutes(),
+                Seconds = date.getSeconds();
+
+            //当前小时、分钟、秒钟数为个位数时在数字前加0
+            Hours = checkTime(Hours);
+            Minutes = checkTime(Minutes);
+            Seconds = checkTime(Seconds);
+            //疑问，为什么方法放于time方法外，大于10时会出现undefined
+            function checkTime(i) {
+                if (i < 10) i = '0' + i; return i;
+            }
+
+            today.innerText = ' 当前时间是 ' + Year + ' 年 ' + Month + ' 月 ' + Day + ' 日 ' + weekday[weekIndex] + '  ' + Hours + ':' + Minutes + ':' + Seconds;
+        }
+    }
+</script>
+</body>
+</html>

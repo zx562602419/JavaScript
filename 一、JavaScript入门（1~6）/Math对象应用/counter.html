@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>科学计算器</title>
+    <style>
+        *{
+            font-size: 22px;
+        }
+        body{
+            background-color: buttonface;
+            border-style: none;
+        }
+        table{
+            width: 100%;
+            margin-top: 20px;
+        }
+        .button{
+            width: 100%;
+            height: 50px;
+        }
+        #inputValue{
+            width: 100%;
+            cursor: default;
+            text-align: center;
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+
+<input type="text" value="0" id="inputValue" readonly />
+
+<script>
+    //用$符代替document.getElementById()
+    var $ = function (str) {
+        return document.getElementById(str);
+    };
+    //将按钮内容存放在数组中
+    var btns = [0,1,2,3,4,5,6,7,8,9,'.','+','-','*','/','sin','cos','tan','acos','asin','atan','log','AC','='];
+    var previousValue = 0, op = '', startNewInput = true;
+    //计算方法
+    var calc = function (strCMD) {
+        var inputValue = $('inputValue');
+        //根据当前单击按钮内容决定所需操作
+        switch (strCMD){
+            //如果是三角函数，直接调用Math对象的相应方法
+            case "sin":
+                inputValue.value = Math.sin(inputValue.value);
+                break;
+            case "cos":
+                inputValue.value = Math.cos(inputValue.value);
+                break;
+            case "tan":
+                inputValue.value = Math.tan(inputValue.value);
+                break;
+            case "acos":
+                inputValue.value = Math.acos(inputValue.value);
+                break;
+            case "asin":
+                inputValue.value = Math.asin(inputValue.value);
+                break;
+            case "atan":
+                inputValue.value = Math.atan(inputValue.value);
+                break;
+            case "log":
+                inputValue.value = Math.log(inputValue.value);
+                break;
+            //如果是四则运算，则执行计算
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+                startNewInput = true;
+                if(op != '' && inputValue.value != ''){
+                    inputValue.value = eval(previousValue +　op + inputValue.value);
+                    op = strCMD;
+                }else{
+                    op = strCMD;
+                }
+                break;
+            case '=':
+                startNewInput = true;
+                if(op != '' && inputValue.value != '') inputValue.value = eval(previousValue +　op + inputValue.value);
+                op = '';
+                previousValue = 0;
+                break;
+            //重置所有变量，恢复初始状态
+            case 'AC':
+                startNewInput = true;
+                inputValue.value = '0';
+                op = '';
+                previousValue = 0;
+                break;
+            //调用字符串的 indexOf 方法查找。如果当前输入中已经有了小数点则跳出操作
+            case '.':
+                if(inputValue.value.indexOf() == !-1) break;
+            //如果是0-9或小数点
+            default:
+                //如果需要清空原有输入，则将原有输入保存在变量 previousValue 中
+                //并且将 需要清空原有输入 的状态设为否
+                if(startNewInput){
+                    startNewInput = false;
+                    previousValue = inputValue.value;
+                    inputValue.value = '0';
+                }
+                //如果当前输入不是 0
+                if(inputValue.value != '0'){
+                    inputValue.value += strCMD;
+                }else if(strCMD != '0'){
+                    inputValue.value = strCMD;
+                }
+        }
+    };
+
+    var creatTable = function () {
+        document.write('<table>');
+        document.write('<tr>');
+        //循环输出按钮
+        for(var i = 0; i < btns.length; i++){
+            document.write('<td><input type="button" value="'+ btns[i] +'" onclick="calc(this.value);" class="button" /></td>');
+            //判断使每一行只放五个按钮
+            if((i+1)%5 == 0){
+                document.write('</tr><tr>');
+            }
+        }
+        document.write('</tr>');
+        document.write('</table>');
+    };
+    creatTable();
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>函数和变量作用域</title>
+</head>
+<body>
+<pre>
+    var v1,v2;
+    v1 = 10;
+    v2 = 20;
+    function a(){
+        var v2,v3;
+
+        console.log('v1 = ' + v1 + '\n v2 = ' + v2 + '\n v3 = ' + v3);
+        /*输出
+        *   v1 = 10              v1为全局变量，a函数可调用
+        *   v2 = undefined       v2在 a函数中重新声明，为局部变量，覆盖全局变量的值，
+        *   v3 = undefined       此时v2、v3均仅做了声明而未赋值，所以结果均为undefined
+        */
+
+        v2 = v3 = 30;
+
+        function b(v3,v4){
+            console.log('v3 = ' + v3 + '\n v4 = ' + v4);
+            /*输出
+            *   v3 = 30              v3为 b函数父级局部变量，可调用b(v3)时参数为30
+            *   v4 = undefined       v4作为b函数的形参进行了声明，但未进行赋值，所以结果为undefined
+            */
+            v2 = v3 = 40;
+        }
+        b(v3);
+
+        console.log('v2 = ' + v2 + '\n v3 = ' + v3);
+        /*输出               此时针对作用域为a的局部变量
+        *   v2 = 40         v2在调用b(v3)函数时，参数发生变化，所以为40
+        *   v3 = 30         v3在b函数中重新声明，为b函数局部变量，赋值对a函数无影响
+        */
+        console.log(v4);
+        //输出报错      v4未定义  v4 is not defined
+
+    }
+    a();
+
+
+
+    /*最终输出结果为：
+    *   v1 = 10
+    *   v2 = undefined
+    *   v3 = undefined
+    *
+    *   v3 = 30
+    *   v4 = undefined
+    *
+    *   v2 = 40
+    *   v3 = 30
+    *
+    *   function.html:40 Uncaught ReferenceError: v4 is not defined
+    */
+
+
+</pre>
+<script>
+    var v1,v2;
+    v1 = 10;
+    v2 = 20;
+    function a(){
+        var v2,v3;
+
+        console.log('v1 = ' + v1 + '\n v2 = ' + v2 + '\n v3 = ' + v3);
+        /*输出
+        *   v1 = 10              v1为全局变量，a函数可调用
+        *   v2 = undefined       v2在 a函数中重新声明，为局部变量，覆盖全局变量的值，
+        *   v3 = undefined       此时v2、v3均仅做了声明而未赋值，所以结果均为undefined
+        */
+
+        v2 = v3 = 30;
+
+        function b(v3,v4){
+            console.log('v3 = ' + v3 + '\n v4 = ' + v4);
+            /*输出
+            *   v3 = 30              v3为 b函数父级局部变量，可调用b(v3)时参数为30
+            *   v4 = undefined       v4作为b函数的形参进行了声明，但未进行赋值，所以结果为undefined
+            */
+            v2 = v3 = 40;
+        }
+        b(v3);
+
+        console.log('v2 = ' + v2 + '\n v3 = ' + v3);
+        /*输出               此时针对作用域为a的局部变量
+        *   v2 = 40         v2在调用b(v3)函数时，参数发生变化，所以为40
+        *   v3 = 30         v3在b函数中重新声明，为b函数局部变量，赋值对a函数无影响
+        */
+        console.log(v4);
+        //输出报错      v4未定义  v4 is not defined
+
+    }
+    a();
+
+    /*最终输出结果为：
+    *   v1 = 10
+    *   v2 = undefined
+    *   v3 = undefined
+    *
+    *   v3 = 30
+    *   v4 = undefined
+    *
+    *   v2 = 40
+    *   v3 = 30
+    *
+    *   function.html:40 Uncaught ReferenceError: v4 is not defined
+    */
+</script>
+</body>
+</html>
