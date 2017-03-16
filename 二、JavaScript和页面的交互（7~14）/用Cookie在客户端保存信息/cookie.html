@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>用Cookie实现可以记住内容的表单</title>
+</head>
+<body onload="loadCookie()" onunload="saveCookie()">
+
+<form action="">
+    <!--<label for="text1">普通输入框：</label>-->
+    <input type="text" id="text1"/>
+
+    <!--<label for="text2">可记住内容输入框：</label>-->
+    <input type="text" id="text2"/>
+    <!--<label for="text3">可记住内容输入框：</label>-->
+    <input type="text" id="text3"/>
+
+    <input type="submit" value="提交"/>
+    <input type="reset" value="重置"/>
+    <input type="button" value="查看cookie" onclick="alert(document.cookie)"/>
+</form>
+<script>
+    function $(str){
+        return document.getElementById(str);
+    }
+    //读cookie方法
+    function readCookie(key){
+        var str,ary;
+        str = document.cookie;
+        ary = str.replace(/ *; */g, '；').split('；');
+        key = escape(key) + '=';
+        for(var i = 0; i < ary.length; i++){
+            if(ary[i].indexOf(key) == 0){
+                return unescape(ary[i].split('=')[1]);
+            }
+        }
+    }
+    //写入cookie方法
+//    function writeCookie(key,value,cookieDomain,cookiepath,expireTime,targetWindow){
+//        var strAppend = '';
+//        strAppend += cookieDomain?'；domin=' + cookieDomain:'';
+//        strAppend += cookiepath?'；path=' + cookiepath:'';
+//        strAppend += expireTime?'；expires=' + expireTime:'';
+//        targetWindow = targetWindow?targetWindow:top;
+//        targetWindow.document.cookie = escape(key) + '=' + escape(value) + strAppend;
+//    }
+    //写入cookie方法
+    function writeCookie(key,value){
+        document.cookie = escape(key) + '=' + escape(value);
+    }
+    //加载cookie方法
+    function loadCookie(){
+        if(readCookie('text2')){
+            $('text2').value = readCookie('text2');
+        }
+        if(readCookie('text3')){
+            $('text3').value = readCookie('text3');
+        }
+    }
+    function saveCookie(){
+        writeCookie('text2',$('text2').value);
+        writeCookie('text3',$('text3').value);
+    }
+</script>
+</body>
+</html>
